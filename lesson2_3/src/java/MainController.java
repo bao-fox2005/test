@@ -5,6 +5,7 @@
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -40,11 +41,18 @@ public class MainController extends HttpServlet {
             String txtUsername = request.getParameter("txtUsername");
             String txtPassword = request.getParameter("txtPassword");
 
+            String url ="";
+            
             if (txtUsername.equalsIgnoreCase("admin") && txtPassword.equals("admin")) {
                 out.print("Dang nhap thanh cong");
+                url = "a.jsp";
             } else {
                 out.print("Dang nhap that bai! Sai username hoac password.");
+               url = "b.jsp";
             }
+            
+            RequestDispatcher rb = request.getRequestDispatcher(url);
+            rb.forward(request, response);
 
             out.println("</body>");
             out.println("</html>");

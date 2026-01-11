@@ -12,6 +12,9 @@
         <title>JSP Page</title>
     </head>
     <body>
-        <h1>Hello World!</h1>
+        <h1>Bang dieu khien</h1>
+        Tinh nang 1 <br/>
+        Tinh nang 2 <br/>
+        Tinh nang 3 <br/>
     </body>
 </html>
