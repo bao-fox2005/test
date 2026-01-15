@@ -1,5 +1,6 @@
 
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.ArrayList;
@@ -25,10 +26,11 @@ public class UserDAO {
         try {
             Connection conn = DbUtils.getConnection();
             String sql = "SELECT * FROM tblUsers "
-                    + " WHERE userID='" + username + "'";
+                    + " WHERE userID=?";
             System.out.println(sql);
-            Statement st = conn.createStatement();
-            ResultSet rs = st.executeQuery(sql);
+            PreparedStatement pst = conn.prepareStatement(sql);
+            pst.setString(1, username);
+            ResultSet rs = pst.executeQuery(sql);
             
             UserDTO user = null;
             while (rs.next()) {
