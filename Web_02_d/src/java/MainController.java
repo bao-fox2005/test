@@ -41,16 +41,15 @@ public class MainController extends HttpServlet {
             String txtUsername = request.getParameter("txtUsername");
             String txtPassword = request.getParameter("txtPassword");
 
-            String url ="";
-            
+            String url = "";
+
             if (txtUsername.equalsIgnoreCase("admin") && txtPassword.equals("admin")) {
-                out.print("Dang nhap thanh cong");
                 url = "a.jsp";
             } else {
-                out.print("Dang nhap that bai! Sai username hoac password.");
-               url = "b.jsp";
+                url = "b.jsp";
             }
-            
+
+            //chuyen trang
             RequestDispatcher rb = request.getRequestDispatcher(url);
             rb.forward(request, response);
 

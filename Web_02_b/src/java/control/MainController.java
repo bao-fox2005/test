@@ -38,18 +38,19 @@ public class MainController extends HttpServlet {
             out.println("</head>");
             out.println("<body>");
 
-            boolean checkError = false;
             String txtA = request.getParameter("txtA");
             String txtB = request.getParameter("txtB");
-            String txtOp = request.getParameter("txtOp");
-            double result = 0;
+
             double a = 0;
             double b = 0;
 
+            String txtOp = request.getParameter("txtOp");
+            double result = 0;
+ 
+           boolean checkError = false;
             try {
                 a = Double.parseDouble(txtA);
                 b = Double.parseDouble(txtB);
-
                 switch (txtOp) {
                     case "+":
                         result = a + b;
@@ -69,19 +70,21 @@ public class MainController extends HttpServlet {
             } catch (Exception e) {
                 checkError = true;
             }
-
+            
             if (!checkError) {
                 out.println(a + txtOp + b + "= <b>" + result + "</b>");
             } else {
-                out.println("Xay ra loi trong qua trinh xu ly!");
-                out.println("</body>");
-                out.println("</html>");
+                out.println("Error");
             }
+
+            
+            out.println("</body>");
+            out.println("</html>");
 
         }
     }
 
-    // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
+// <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
      * Handles the HTTP <code>GET</code> method.
      *

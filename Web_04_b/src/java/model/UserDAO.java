@@ -30,7 +30,7 @@ public class UserDAO {
             System.out.println(sql);
             PreparedStatement pst = conn.prepareStatement(sql);
             pst.setString(1, username);
-            ResultSet rs = pst.executeQuery(sql);
+            ResultSet rs = pst.executeQuery();
             
             UserDTO user = null;
             while (rs.next()) {
