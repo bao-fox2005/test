@@ -9,6 +9,7 @@ package model;
  * @author se193234_TranGiaBao
  */
 public class UserDTO {
+
     private String userID;
     private String fullName;
     private String password;
@@ -70,6 +71,5 @@ public class UserDTO {
     public String toString() {
         return "UserDTO{" + "userID=" + userID + ", fullName=" + fullName + ", password=" + password + ", roleID=" + roleID + ", status=" + status + '}';
     }
-    
-    
+
 }

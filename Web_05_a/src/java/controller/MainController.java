@@ -34,15 +34,18 @@ public class MainController extends HttpServlet {
         try ( PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
             String action = request.getParameter("action");
-            String url = "";
+            String url = "login";
+
             if (action.equals("login")) {
                 url = "LoginController";
             } else if (action.equals("logout")) {
                 url = "LogoutController";
             }
 
-            RequestDispatcher rb = request.getRequestDispatcher(url);
-            rb.forward(request, response);
+            // Chuyen trang
+            RequestDispatcher rd = request.getRequestDispatcher(url);
+            rd.forward(request, response);
+
         }
     }
 

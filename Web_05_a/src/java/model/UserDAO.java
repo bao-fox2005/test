@@ -1,12 +1,13 @@
 package model;
 
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.Statement;
 import java.util.ArrayList;
 import model.UserDTO;
 import utils.DbUtils;
-
 
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
@@ -23,7 +24,7 @@ public class UserDAO {
     public UserDAO() {
     }
 
-     public UserDTO searchById(String username) {
+    public UserDTO searchById(String username) {
         try {
             Connection conn = DbUtils.getConnection();
             String sql = "SELECT * FROM tblUsers "
@@ -43,6 +44,8 @@ public class UserDAO {
                 user = new UserDTO(userID, fullName, password, roleID, status);
             }
             
+            System.out.println(user);
+            
             return user;
         } catch (Exception e) {
             return null;
@@ -56,4 +59,5 @@ public class UserDAO {
         }
         return null;
     }
+
 }

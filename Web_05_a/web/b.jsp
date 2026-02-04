@@ -1,6 +1,6 @@
 <%-- 
     Document   : b
-    Created on : Jan 19, 2026, 10:29:10 AM
+    Created on : Jan 8, 2026, 11:40:26 AM
     Author     : se193234_TranGiaBao
 --%>
 
@@ -12,6 +12,6 @@
         <title>JSP Page</title>
     </head>
     <body>
-        <h1>Dang nhap that bai! Sai username hoac password.</h1>
+         <h1>Dang nhap that bai! Sai username hoac password.</h1>
     </body>
 </html>

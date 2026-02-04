@@ -37,30 +37,31 @@ public class LoginController extends HttpServlet {
         /* TODO output your page here. You may use following sample code. */
         String url = "";
         HttpSession session = request.getSession();
-
-        if (session.getAttribute("user") == null) { // chua dang nhap
+        if (session.getAttribute("user") == null) {
             String txtUsername = request.getParameter("txtUsername");
             String txtPassword = request.getParameter("txtPassword");
 
             UserDAO udao = new UserDAO();
-
             UserDTO user = udao.login(txtUsername, txtPassword);
+            System.out.println(user);
             if (user != null) {
-                url = "a.jsp";
-                session.setAttribute("user", user);
+                if (user.isStatus()) {
+                    url = "a.jsp";
+                    session.setAttribute("user", user);
+                } else {
+                    url = "e403.jsp";
+                }
             } else {
                 url = "login.jsp";
-                session.setAttribute("message", "Invalid username or password!");
+                request.setAttribute("message", "Invalid username or password!");
             }
+
         } else {
             url = "a.jsp";
-
         }
-
-        //chuyen trang
-        RequestDispatcher rb = request.getRequestDispatcher(url);
-        rb.forward(request, response);
-
+        // Chuyen trang
+        RequestDispatcher rd = request.getRequestDispatcher(url);
+        rd.forward(request, response);
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
