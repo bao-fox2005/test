@@ -33,16 +33,40 @@ public class MainController extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         try ( PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
-            String action = request.getParameter("action");
+            out.println("<!DOCTYPE html>");
+            out.println("<html>");
+            out.println("<head>");
+            out.println("<title>Servlet MainController</title>");
+            out.println("</head>");
+            out.println("<body>");
             String url = "";
-            if (action.equals("login")) {
-                url = "LoginController";
-            } else if (action.equals("logout")) {
-                url = "LogoutController";
+            HttpSession session = request.getSession();
+
+            if (session.getAttribute("user") == null) { // chua dang nhap
+                String txtUsername = request.getParameter("txtUsername");
+                String txtPassword = request.getParameter("txtPassword");
+
+                
+                UserDAO udao = new UserDAO();
+                UserDTO user = udao.login(txtUsername, txtPassword);
+                if (user != null) {
+                    url = "a.jsp";
+                    session.setAttribute("user", user);
+                } else {
+                    url = "login.jsp";
+                    session.setAttribute("message", "Invalid username or password!");
+                }
+            } else {
+                url = "a.jsp";
+
             }
 
+            //chuyen trang
             RequestDispatcher rb = request.getRequestDispatcher(url);
             rb.forward(request, response);
+
+            out.println("</body>");
+            out.println("</html>");
         }
     }
 
