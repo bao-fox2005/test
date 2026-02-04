@@ -4,13 +4,16 @@
  */
 package controller;
 
+import static com.sun.corba.se.spi.presentation.rmi.StubAdapter.request;
 import java.io.IOException;
 import java.io.PrintWriter;
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import javax.websocket.Session;
 
 /**
  *
@@ -30,13 +33,13 @@ public class LogoutController extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-       
         HttpSession session = request.getSession();
-        
-        if (session.getAttribute("user") != null) {
+        if (session.getAttribute("user") != null) { // neu da login rùi
             session.invalidate();
+            // huy toan bo noi dung session
         }
         String url = "login.jsp";
+        //chuyen trang
         response.sendRedirect(url);
     }
 

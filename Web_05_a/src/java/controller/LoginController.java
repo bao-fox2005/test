@@ -4,6 +4,7 @@
  */
 package controller;
 
+import model.UserDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.RequestDispatcher;
@@ -13,7 +14,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import model.UserDTO;
-import model.userDAO;
 
 /**
  *
@@ -34,31 +34,33 @@ public class LoginController extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
 
+        /* TODO output your page here. You may use following sample code. */
         String url = "";
         HttpSession session = request.getSession();
 
-        if (session.getAttribute("user") == null) {
+        if (session.getAttribute("user") == null) { // chua dang nhap
             String txtUsername = request.getParameter("txtUsername");
             String txtPassword = request.getParameter("txtPassword");
-        
-            userDAO udao = new userDAO();
+
+            UserDAO udao = new UserDAO();
+
             UserDTO user = udao.login(txtUsername, txtPassword);
-            
-            System.out.println(user);
-            
             if (user != null) {
                 url = "a.jsp";
+                session.setAttribute("user", user);
             } else {
                 url = "login.jsp";
-                request.setAttribute("message", "Invalid username or password!");
+                session.setAttribute("message", "Invalid username or password!");
             }
         } else {
             url = "a.jsp";
+
         }
-        
+
+        //chuyen trang
         RequestDispatcher rb = request.getRequestDispatcher(url);
         rb.forward(request, response);
-        
+
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
