@@ -13,11 +13,11 @@
     </head>
     <body>
         <form action="MainController" method="post">
-           UserName: <input type="text" name="txtUserName"> <br/>
-        PassWord: <input type="text" name="txtPassword"> <br/>
-        <input type = "submit" value="Login"> 
+            UserName: <input type="text" name="txtUserName"> <br/>
+            PassWord: <input type="text" name="txtPassword"> <br/>
+            <input type = "submit" value="Login"> 
         </form>
-        
+
 
     </body>
 </html>

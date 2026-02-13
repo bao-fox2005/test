@@ -33,7 +33,9 @@ public class LogoutController extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
+        
         HttpSession session = request.getSession();
+        
         if (session.getAttribute("user") != null) { // neu da login rùi
             session.invalidate();
             // huy toan bo noi dung session

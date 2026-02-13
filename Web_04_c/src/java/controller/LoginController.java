@@ -50,7 +50,7 @@ public class LoginController extends HttpServlet {
                 session.setAttribute("user", user);
             } else {
                 url = "login.jsp";
-                session.setAttribute("message", "Invalid username or password!");
+                request.setAttribute("message", "Invalid username or password!");
             }
         } else {
             url = "a.jsp";

@@ -15,17 +15,13 @@
     <body>
 
         <%
-            UserDTO u = (UserDTO) session.getAttribute("user");
-            
-            if (u != null) {
-        %>       
-        <h1>Welcome,  <%=u.getFullName()%></h1>
-        <a href="MainController?acction=logout&"></a>
-        <h2>Bang dieu khien</h2>
-        Tinh nang 1 <br>
-        Tinh nang 2 <br>
-        Tinh nang 3 <br>
-        <% } else {
+            UserDTO u = (UserDTO)session.getAttribute("user");
+            if (u!=null){       
+        %>
+                <h1>Welcome, <%=u.getFullName()%> </h1>
+                <a href="MainController?action=logout&">Logout</a><br/>
+                <a href="search.jsp">Seach</a>
+        <%  } else {
                 response.sendRedirect("login.jsp");
             }
         %>

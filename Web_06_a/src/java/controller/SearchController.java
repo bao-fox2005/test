@@ -6,17 +6,20 @@ package controller;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
+import model.UniversityDAO;
+import model.UniversityDTO;
 
 /**
  *
  * @author se193234_TranGiaBao
  */
-public class LogoutController extends HttpServlet {
+public class SearchController extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -31,26 +34,37 @@ public class LogoutController extends HttpServlet {
             throws ServletException, IOException {
         request.setCharacterEncoding("UTF-8");
         response.setCharacterEncoding("UTF-8");
-        HttpSession session = request.getSession();
-        if (session.getAttribute("user") != null) {
-            // huy bo toan bo noi dung session
-            session.invalidate();
+        response.setContentType("text/html;charset=UTF-8");
+        String keywords = request.getParameter("keywords");
+        if (keywords == null) {
+            keywords = "";
         }
-        String url = "login.jsp";
-        response.sendRedirect(url);
+
+        System.out.println(keywords);
+        UniversityDAO udao = new UniversityDAO();
+        ArrayList<UniversityDTO> list = new ArrayList<>();
+        if (keywords.trim().length() > 0) {
+            list = udao.filterByName(keywords);
+        }
+        request.setAttribute("list", list);
+        request.setAttribute("keywords", keywords);
+        String url = "search.jsp";
+        RequestDispatcher rd = request.getRequestDispatcher(url);
+        rd.forward(request, response);
     }
 
-    // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
-    /**
-     * Handles the HTTP <code>GET</code> method.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
-    @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response)
+
+// <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
+/**
+ * Handles the HTTP <code>GET</code> method.
+ *
+ * @param request servlet request
+ * @param response servlet response
+ * @throws ServletException if a servlet-specific error occurs
+ * @throws IOException if an I/O error occurs
+ */
+@Override
+protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         processRequest(request, response);
     }
@@ -64,7 +78,7 @@ public class LogoutController extends HttpServlet {
      * @throws IOException if an I/O error occurs
      */
     @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response)
+protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         processRequest(request, response);
     }
@@ -75,7 +89,7 @@ public class LogoutController extends HttpServlet {
      * @return a String containing servlet description
      */
     @Override
-    public String getServletInfo() {
+public String getServletInfo() {
         return "Short description";
     }// </editor-fold>
 

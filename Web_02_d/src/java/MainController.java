@@ -51,7 +51,8 @@ public class MainController extends HttpServlet {
 
             //chuyen trang
             RequestDispatcher rb = request.getRequestDispatcher(url);
-            rb.forward(request, response);
+            rb.forward(request, response);// Lệnh này thực hiện việc chuyển tiếp toàn bộ yêu cầu (request) và phản hồi (response) sang trang đích đó.
+            
 
             out.println("</body>");
             out.println("</html>");

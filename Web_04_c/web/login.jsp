@@ -13,7 +13,7 @@
     </head>
     <body>
         <form action = "MainController" method="post">
-            <input type="hidden" name="action" value="login">
+            <input type="hidden" name="action" value="login"> <!-- nó se an và Mục đích: Nó dùng để gửi một "tín hiệu" ngầm về cho Servlet. Ở đây, nó gửi một cặp dữ liệu là action = login. -->
             Username: <input type="text" name="txtUsername" /> <br/>
             Password: <input type="password" name="txtPassword" /> <br/>
             <input type="submit" value="Login">

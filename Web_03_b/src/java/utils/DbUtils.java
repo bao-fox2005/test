@@ -25,8 +25,11 @@ public class DbUtils {
     public static Connection getConnection() throws ClassNotFoundException, SQLException {
         Connection conn = null;
         Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
+        //Gọi người dẫn đường: Nạp Driver của Microsoft SQL Server vào hệ thống để Java biết cách giao tiếp với nó.
         String url = "jdbc:sqlserver://localhost:1433;databaseName=" + DB_NAME;
+        //Định vị: Chỉ đường đến Database (đang chạy ở máy cục bộ localhost tại cổng 1433).
         conn = DriverManager.getConnection(url, DB_USER_NAME, DB_PASSWORD);
+        //Mở cửa: Thực hiện lệnh kết nối bằng cách đưa URL, Username và Password. Nếu thành công, nó trả về một đối tượng Connection.
         return conn;
     }
 
@@ -37,6 +40,7 @@ public class DbUtils {
             Logger.getLogger(DbUtils.class.getName()).log(Level.SEVERE, null, ex);
         } catch (SQLException ex) {
             Logger.getLogger(DbUtils.class.getName()).log(Level.SEVERE, null, ex);
+        //(Lỗi "Sự cố dữ liệu")
         }
     }
 }

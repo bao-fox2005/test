@@ -28,12 +28,15 @@ public class UserDAO {
             String sql = "SELECT * FROM tblUsers "
                     + " WHERE userID=?";
             System.out.println(sql);
-            PreparedStatement pst = conn.prepareStatement(sql);
+            PreparedStatement pst = conn.prepareStatement(sql); //Đưa lệnh vào "máy chuẩn bị"
+            //gửi câu lệnh có dấu ? này sang SQL Server trước. SQL Server sẽ đọc và phân tích cấu trúc câu lệnh này (Prepare).
             pst.setString(1, username);
+            //trên cb câu lenh
             ResultSet rs = pst.executeQuery();
             
+            
             UserDTO user = null;
-            while (rs.next()) {
+            while (rs.next()) { //"Đọc" dữ liệu từ bảng kết quả
                 String userID = rs.getString("userID");
                 String fullName = rs.getString("fullName");
                 String password = rs.getString("password");

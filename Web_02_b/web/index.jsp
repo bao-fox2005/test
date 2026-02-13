@@ -15,8 +15,9 @@
         <form action="MainController" methor="get">
             a: <input type="text" name="txtA"/> <br/>
             b: <input type="text" name="txtB"/> <br/>
-            <select name="txtOp">
-                <option value="+">+</option>
+            <select name="txtOp"> <!-- thẻ <select> này tạo ra một danh sách thả xuống (dropdown list) để người dùng chọn từ các phương án có sẵn -->
+                <option value="+">+</option> 
+                <!-- <option value="++">+</option> là nếu ta chọn + thì nó sẽ dua + trong value -->
                 <option value="-">-</option>
                 <option value="*">*</option>
                 <option value="/">/</option>

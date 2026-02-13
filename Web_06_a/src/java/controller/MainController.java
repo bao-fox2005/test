@@ -27,22 +27,28 @@ public class MainController extends HttpServlet {
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
-    protected void processRequest(HttpServletRequest request, HttpServletResponse response)
+     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-
+        request.setCharacterEncoding("UTF-8");
+        response.setCharacterEncoding("UTF-8");
+        
         String action = request.getParameter("action");
         String url = "login";
-
-        if (action.equals("login")) {
+         
+        if(action.equals("login")){
             url = "LoginController";
-        } else if (action.equals("logout")) {
+        }else if(action.equals("logout")){
             url = "LogoutController";
+        }else if(action.equals("search")){
+            url = "SearchController";
         }
-
+        
+        // Chuyen trang
         RequestDispatcher rd = request.getRequestDispatcher(url);
         rd.forward(request, response);
-
+        
     }
+
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**

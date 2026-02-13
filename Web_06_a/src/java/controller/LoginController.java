@@ -12,8 +12,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import model.UserDAO;
 import model.UserDTO;
-import model.userDAO;
+
 
 /**
  *
@@ -30,35 +31,38 @@ public class LoginController extends HttpServlet {
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
-    protected void processRequest(HttpServletRequest request, HttpServletResponse response)
+   protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-
+        request.setCharacterEncoding("UTF-8");
+        response.setCharacterEncoding("UTF-8");
         String url = "";
         HttpSession session = request.getSession();
-
         if (session.getAttribute("user") == null) {
             String txtUsername = request.getParameter("txtUsername");
             String txtPassword = request.getParameter("txtPassword");
-        
-            userDAO udao = new userDAO();
+
+            UserDAO udao = new UserDAO();
             UserDTO user = udao.login(txtUsername, txtPassword);
-            
             System.out.println(user);
-            
             if (user != null) {
-                url = "a.jsp";
+                if (user.isStatus()) {
+                    url = "welcome.jsp";
+                    session.setAttribute("user", user);
+                } else {
+                    url = "e403.jsp";
+                }
             } else {
                 url = "login.jsp";
                 request.setAttribute("message", "Invalid username or password!");
             }
+
         } else {
-            url = "a.jsp";
+            url = "welcome.jsp";
         }
-        
-        RequestDispatcher rb = request.getRequestDispatcher(url);
-        rb.forward(request, response);
-        
+        // Chuyen trang
+        RequestDispatcher rd = request.getRequestDispatcher(url);
+        rd.forward(request, response);
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

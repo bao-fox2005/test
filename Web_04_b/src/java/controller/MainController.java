@@ -52,9 +52,10 @@ public class MainController extends HttpServlet {
                 if (user != null) {
                     url = "a.jsp";
                     session.setAttribute("user", user);
+                    //đối tượng user sẽ được treo lơ lửng trên Server. Dù người dùng có đi đâu trong website, món đồ đó vẫn luôn ở đó chờ họ.
                 } else {
                     url = "login.jsp";
-                    session.setAttribute("message", "Invalid username or password!");
+                    request.setAttribute("message", "Invalid username or password!");
                 }
             } else {
                 url = "a.jsp";
