@@ -128,7 +128,5 @@ public class UniversityDTO {
     public void setIsDraft(boolean isDraft) {
         this.isDraft = isDraft;
     }
-    
-    
-    
+   
 }

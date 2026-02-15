@@ -1,24 +1,30 @@
 <%-- 
     Document   : search
-    Created on : Jan 26, 2026, 11:09:19 AM
+    Created on : Feb 15, 2026, 5:56:47 PM
     Author     : se193234_TranGiaBao
 --%>
 
+<%@page import="java.util.ArrayList"%>
+<%@page import="java.util.ArrayList"%>
+<%@page import="model.UserDTO"%>
+<%@page import="model.UniversityDTO"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>search</title>
+        <title>JSP Page</title>
     </head>
-    <jsp:include page="welcome.jsp" />
+    <body>
+        <jsp:include page="welcome.jsp" />
 
         <c:if test="${empty user}">
             <c:redirect url="login.jsp"/>
         </c:if>
 
         <c:if test="${not empty user}">
-
+            
+            <a href="university-form.jsp"> Add </a>
             <form action="MainController" method="post">
                 <input type="hidden" name="action" value="search"/>
                 Input name:
@@ -45,6 +51,7 @@
                             <th>Students</th>
                             <th>Faculties</th>
                             <th></th>
+                            <th></th>
                         </tr>
                     </thead>
 
@@ -60,12 +67,19 @@
                             <td>${u.totalStudents}</td>
                             <td>${u.totalFaculties}</td>
                             <td>
-                                <<form action="MainController" methor="POST"
-                                    onsubmit = "return confirm('Bạn có chắc chắn muốn xóa trường đại học này không?');">
-                                           
-                                </form>>
-                            
-                                </td>
+                                <c:if test="${u.isDraft}">
+                                    <input type="submit" value="Update"/>
+                                </c:if>
+                            </td>
+                            <td>
+                                <form action="MainController" method="POST"
+                                      onsubmit="return confirm('Bạn có chắc chắn muốn xóa trường đại học này không?');">
+                                    <input type="hidden" name="action" value="deleteUniversity"/>
+                                    <input type="hidden" name="id" value="${u.id}"/>
+                                    <input type="hidden" name="keywords" value="${keywords}"/>
+                                    <input type="submit" value="Delete"/>
+                                </form>
+                            </td>
                         </tr>
                     </c:forEach>
                 </table>

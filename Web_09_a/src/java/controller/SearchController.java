@@ -12,7 +12,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import utils.UniversityDAO;
+import model.UniversityDAO;
 import model.UniversityDTO;
 
 /**
@@ -32,30 +32,25 @@ public class SearchController extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        request.setCharacterEncoding("UTF-8");
+        response.setCharacterEncoding("UTF-8");
         response.setContentType("text/html;charset=UTF-8");
-        try ( PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */
-            request.setCharacterEncoding("UTF-8");
-            response.setCharacterEncoding("UTF-8");
-            response.setContentType("text/html;charset=UTF-8");
-            String keywords = request.getParameter("keywords");
-
-            if (keywords == null) {
-                keywords = "";
-            }
-
-            System.out.println(keywords);
-            UniversityDAO udao = new UniversityDAO();
-            ArrayList<UniversityDTO> list = new ArrayList<>();
-            if (keywords.trim().length() > 0) {
-                list = udao.filterByName(keywords);
-            }
-            request.setAttribute("list", list);
-            request.setAttribute("keywords", keywords);
-            String url = "search.jsp";
-            RequestDispatcher rd = request.getRequestDispatcher(url);
-            rd.forward(request, response);
+        String keywords = request.getParameter("keywords");
+        if (keywords == null) {
+            keywords = "";
         }
+
+        System.out.println(keywords);
+        UniversityDAO udao = new UniversityDAO();
+        ArrayList<UniversityDTO> list = new ArrayList<>();
+        if (keywords.trim().length() > 0) {
+            list = udao.filterByName(keywords);
+        }
+        request.setAttribute("list", list);
+        request.setAttribute("keywords", keywords);
+        String url = "search.jsp";
+        RequestDispatcher rd = request.getRequestDispatcher(url);
+        rd.forward(request, response);
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

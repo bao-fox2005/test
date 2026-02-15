@@ -1,9 +1,10 @@
 <%-- 
-    Document   : welcome
-    Created on : Jan 26, 2026, 11:09:27 AM
+    Document   : a
+    Created on : Jan 8, 2026, 11:39:12 AM
     Author     : se193234_TranGiaBao
 --%>
 
+<%@page import="model.UserDTO"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>

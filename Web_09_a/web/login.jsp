@@ -1,6 +1,6 @@
 <%-- 
     Document   : login
-    Created on : Jan 26, 2026, 11:09:10 AM
+    Created on : Jan 8, 2026, 11:25:39 AM
     Author     : se193234_TranGiaBao
 --%>
 
@@ -17,10 +17,9 @@
             Username: <input type="text" name="txtUsername" required="required" /> <br/>
             Password: <input type="password" name="txtPassword" required="required"  /> <br/>
             <input type="submit" value="Login" />
-        </form><!-- comment -->
-
-    <c:if test="not empty message">
-        ${message}
-    </c:if>
-</body>
+        </form>
+        <c:if test="not empty message">
+            <span style="color:red">${message}</span>
+        </c:if>
+    </body>
 </html>
