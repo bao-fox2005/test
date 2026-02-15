@@ -32,7 +32,7 @@ public class SearchController extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-         request.setCharacterEncoding("UTF-8");
+        request.setCharacterEncoding("UTF-8");
         response.setCharacterEncoding("UTF-8");
         response.setContentType("text/html;charset=UTF-8");
         String keywords = request.getParameter("keywords");
@@ -48,11 +48,9 @@ public class SearchController extends HttpServlet {
         }
         request.setAttribute("list", list);
         request.setAttribute("keywords", keywords);
-        //Gửi ngược lại từ khóa để khi trang tải lại, từ khóa vẫn nằm trong ô Search (tránh việc người dùng phải gõ lại).
         String url = "search.jsp";
         RequestDispatcher rd = request.getRequestDispatcher(url);
         rd.forward(request, response);
-        
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

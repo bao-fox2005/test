@@ -33,8 +33,8 @@ public class LoginController extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-
-        /* TODO output your page here. You may use following sample code. */
+        request.setCharacterEncoding("UTF-8");
+        response.setCharacterEncoding("UTF-8");
         String url = "";
         HttpSession session = request.getSession();
         if (session.getAttribute("user") == null) {

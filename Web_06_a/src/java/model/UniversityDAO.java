@@ -92,5 +92,4 @@ public class UniversityDAO {
     public ArrayList<UniversityDTO> filterByName(String name) {
         return filterByColum("name", name);
     }
-
 }
